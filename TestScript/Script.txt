@@ -1,0 +1,43 @@
+const response = pm.response.json(); 
+
+pm.test("Status code is 201", function () {
+    pm.response.to.have.status(201);
+});
+
+pm.test("Name is string", function() {
+    pm.expect(response.name).to.be.a('string');
+});
+
+pm.test("Has phone property", function() {
+    pm.expect(response).to.have.property('phone')
+});
+
+pm.test("Username is Test1", function() {
+    pm.expect(response.username).to.be.eql("Test1")
+});
+
+pm.test("Id is less than 20", function() {
+    pm.expect(response.id).lessThan(20);
+});
+
+pm.test("City is Kochi", function() {
+    pm.expect(response.address.city).to.be.eql("Kochi")
+});
+
+pm.test("Phone is not string", function() {
+    pm.expect(response.phone).to.be.a('string');
+});
+
+pm.test("Successful Post Request", function() {
+    pm.expect(pm.response.code).to.be.oneOf([201, 202]);
+});
+
+pm.test("Response time less than 300ms", function() {
+    pm.expect(pm.response.responseTime).to.be.below(300);
+});
+
+pm.test("Has city property in adress", function() {
+    pm.expect(response.address).to.have.property('city')
+});
+
+console.log(response.address);
